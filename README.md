@@ -1,6 +1,8 @@
-# JDIF
+# J-DIF
 
 Read from standard input and covert valid LDIF format to JSON.
+
+LDIF - LDAP Data Interchange Format
 
 ```bash
 $ echo 'hello: world' | jdif 

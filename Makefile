@@ -1,3 +1,3 @@
 build:
-  clang main.c -o jdif
+	clang main.c -o jdif
       
