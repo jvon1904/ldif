@@ -19,6 +19,8 @@ pi: 3.14
 # Strings with spaces
 sentence: The quick brown fox jumps over the lazy dog!
 
+ranking: #1!
+
 ###
 #
 # run `make example` to convert this to JSON!

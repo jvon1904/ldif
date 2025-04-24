@@ -93,7 +93,9 @@ int main(int argc, char *argv[]) {
 
   while ((c = getchar()) && !eof) {
     if (c == '#') {
-      cmt = 1;
+      if (!nval) {
+        cmt = 1;
+      }
     }
     if (c == ':') {
       if (!cmt) {
