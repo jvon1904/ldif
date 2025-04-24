@@ -66,16 +66,16 @@ void appendValue(String *json, String *val) {
 int main() {
   int c;
   String json;
-  initString(&json);
   String val;
+  initString(&json);
   initString(&val);
 
   // Flags
-  int nval = 0;
-  int skip = 0;
-  int eof = 0;
-  int nwln = 0;
-  int cmt = 0;
+  int nval = 0;   // new value
+  int skip = 0;   // skip next character
+  int eof = 0;    // end of file
+  int nwln = 0;   // newline
+  int cmt = 0;    // comment
 
   // Add the first two characters
   appendString(&json, '{');
@@ -104,13 +104,17 @@ int main() {
         }
       }
     } else if (c == '\n') { // refresh everything
-      nval = 0;
-      appendValue(&json, &val);
-      freeString(&val);
-      initString(&val);
-      skip = 0;
-      nwln = 1;
-      cmt = 0;
+      if (cmt) {
+        cmt = 0;
+      } else {
+        appendValue(&json, &val);
+        freeString(&val);
+        initString(&val);
+        nval = 0;
+        skip = 0;
+        cmt = 0;
+        nwln = 1;
+      }
     } else if (c == EOF) {
       appendValue(&json, &val);
       appendString(&json, '}');
