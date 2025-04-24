@@ -1,8 +1,14 @@
 # J-DIF
 
-Read from standard input and covert valid LDIF format to JSON.
+Read from standard input and covert valid LDIF (LDAP Data Interchange Format) to JSON.
 
-LDIF - LDAP Data Interchange Format
+## Getting Started
+
+To compile run `make`.
+
+To test and example run `make example`.
+
+## Usage
 
 ```bash
 $ echo 'hello: world' | jdif 
