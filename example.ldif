@@ -1,6 +1,20 @@
+
 # Example Data
+
+# Pre-data comments!
+#
+
+
 name: Test
 age: 99
+# Mid-data comments!
 uid: 1329692a-9108-47ec-aab1-1a2a4c2663c4
+
+
 time: 10:55pm
 pi: 3.14
+
+###
+#
+# Post data comments!
+

@@ -73,9 +73,10 @@ int main() {
   // Flags
   int nval = 0;   // new value
   int skip = 0;   // skip next character
-  int eof = 0;    // end of file
+  int eof  = 0;   // end of file
   int nwln = 0;   // newline
-  int cmt = 0;    // comment
+  int cmt  = 0;   // comment
+  int cmnd = 0;   // comment ended
 
   // Add the first two characters
   appendString(&json, '{');
@@ -104,16 +105,18 @@ int main() {
         }
       }
     } else if (c == '\n') { // refresh everything
-      if (cmt) {
-        cmt = 0;
+      if (!cmt && !cmnd) {
+        if(nval) {
+          appendValue(&json, &val);
+          freeString(&val);
+          initString(&val);
+          nval = 0;
+          skip = 0;
+          nwln = 1;
+        }
       } else {
-        appendValue(&json, &val);
-        freeString(&val);
-        initString(&val);
-        nval = 0;
-        skip = 0;
         cmt = 0;
-        nwln = 1;
+        cmnd = 1;
       }
     } else if (c == EOF) {
       appendValue(&json, &val);
@@ -132,6 +135,7 @@ int main() {
         }
         skip = 0;
         nwln = 0;
+        cmnd = 0;
       }
     }
   }
