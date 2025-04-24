@@ -35,7 +35,8 @@ void freeString(String *str) {
 void appendValue(String *json, String *val) {
   int is_int = 1;
   for (int i = 0; i < strlen(val->data); i++) {
-    if (!(val->data[i] == '0' || 
+    if (!(val->data[i] == '.' || 
+        val->data[i] == '0' ||
         val->data[i] == '1' ||
         val->data[i] == '2' ||
         val->data[i] == '3' ||
@@ -86,11 +87,15 @@ int main() {
     }
     if (c == ':') {
       if (!cmt) {
-        appendString(&json, '"');
-        appendString(&json, ':');
-        appendString(&json, ' ');
-        nval = 1;
-        skip = 1;
+        if (nval) {
+          appendString(&val, c);
+        } else  {
+          appendString(&json, '"');
+          appendString(&json, ':');
+          appendString(&json, ' ');
+          nval = 1;
+          skip = 1;
+        }
       }
     } else if (c == ' ') {
       if (!cmt) {
