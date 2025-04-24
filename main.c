@@ -71,11 +71,11 @@ int main() {
   initString(&val);
 
   // Flags
-  int nval = 0;   // new value
+  int nval = 0;   // new value started
   int skip = 0;   // skip next character
   int eof  = 0;   // end of file
   int nwln = 0;   // newline
-  int cmt  = 0;   // comment
+  int cmt  = 0;   // comment started
   int cmnd = 0;   // comment ended
 
   // Add the first two characters
@@ -101,7 +101,11 @@ int main() {
     } else if (c == ' ') {
       if (!cmt) {
         if (!skip) {
-          appendString(&json, ' ');
+          if (nval) {
+            appendString(&val, ' ');
+          } else {
+            appendString(&json, ' ');
+          }
         }
       }
     } else if (c == '\n') { // refresh everything

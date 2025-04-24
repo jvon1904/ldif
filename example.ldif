@@ -1,20 +1,25 @@
 
 # Example Data
 
-# Pre-data comments!
-#
-
-
+# Strings
 name: Test
+
+# Integers
 age: 99
-# Mid-data comments!
+
+# Numbers and letters mixed
 uid: 1329692a-9108-47ec-aab1-1a2a4c2663c4
 
-
+# Strings with colons
 time: 10:55pm
+
+# Floats
 pi: 3.14
+
+# Strings with spaces
+sentence: The quick brown fox jumps over the lazy dog!
 
 ###
 #
-# Post data comments!
+# run `make example` to convert this to JSON!
 
