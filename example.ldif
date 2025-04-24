@@ -19,6 +19,7 @@ pi: 3.14
 # Strings with spaces
 sentence: The quick brown fox jumps over the lazy dog!
 
+# Strings with hashes
 ranking: #1!
 
 ###
