@@ -1,6 +1,6 @@
 # J-DIF
 
-Read from standard input and covert valid LDIF (LDAP Data Interchange Format) to JSON.
+Convert LDIF (LDAP Data Interchange Format) to JSON.
 
 ## Getting Started
 

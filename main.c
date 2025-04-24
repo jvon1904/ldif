@@ -63,7 +63,16 @@ void appendValue(String *json, String *val) {
   }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+  if (argc > 1) {
+    if (!strcmp(argv[1], "--help")) {
+      printf("J-DIF -- Convert LDIF (LDAP Data Interchange Format) to JSON.\n\n");
+      printf("-f <file>\tSpecify a a file to parse.\n");
+      printf("--stdin\t\tParse from standard input.\n");
+      return 0;
+    }
+  }
+
   int c;
   String json;
   String val;
