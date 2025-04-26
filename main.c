@@ -64,15 +64,8 @@ void appendValue(String *json, String *val) {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc > 1) {
-    if (!strcmp(argv[1], "--help")) {
-      printf("J-DIF -- Convert LDIF (LDAP Data Interchange Format) to JSON.\n\n");
-      printf("-f <file>\tSpecify a a file to parse.\n");
-      printf("--stdin\t\tParse from standard input.\n");
-      return 0;
-    }
-  }
-
+  // Initialize variables
+  FILE *fptr;
   int c;
   String json;
   String val;
@@ -80,6 +73,7 @@ int main(int argc, char *argv[]) {
   initString(&val);
 
   // Flags
+  int fopt = 0;   // file option
   int nval = 0;   // new value started
   int skip = 0;   // skip next character
   int eof  = 0;   // end of file
@@ -87,11 +81,42 @@ int main(int argc, char *argv[]) {
   int cmt  = 0;   // comment started
   int cmnd = 0;   // comment ended
 
+  // Check for command options
+  if (argc > 1) {
+    // --help
+    if (!strcmp(argv[1], "--help")) {
+      printf("J-DIF -- Convert LDIF (LDAP Data Interchange Format) to JSON.\n\n");
+      printf("-f <file>\tSpecify a a file to parse.\n");
+      printf("--stdin\t\tParse from standard input.\n");
+      return 0;
+    // --file
+    } else if (!strcmp(argv[1], "-f") || !strcmp(argv[1], "--file")) {
+      if (argc < 3) {
+        printf("Please specify a file path with `jdif -f /path/to/file`\n");
+        return 1;
+      } else {
+        fptr = fopen(argv[2], "r");
+        if (fptr == NULL) {
+          printf("Could not open file: %s\n", argv[2]);
+          return 1;
+        }
+        fopt = 1;
+      }
+    // Unsupported
+    } else {
+      printf("Usupported option: %s.\n", argv[1]);
+      return 1;
+    }
+  }
+
+
+
   // Add the first two characters
   appendString(&json, '{');
   appendString(&json, '"');
 
-  while ((c = getchar()) && !eof) {
+  // Stream characters from STDIN or file
+  while ((c = fopt ? fgetc(fptr) : getchar()) && !eof) {
     if (c == '#') {
       if (!nval) {
         cmt = 1;
