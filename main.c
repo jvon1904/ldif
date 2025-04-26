@@ -109,7 +109,9 @@ int main(int argc, char *argv[]) {
     }
   }
 
-
+  if (!fopt && (fseek(stdin, 0, SEEK_END) == 0)) {
+    return 0;
+  }
 
   // Add the first two characters
   appendString(&json, '{');
@@ -161,6 +163,7 @@ int main(int argc, char *argv[]) {
     } else if (c == EOF) {
       appendValue(&json, &val);
       appendString(&json, '}');
+      appendString(&json, '\n');
       eof = 1;
     } else {
       if (!cmt) {

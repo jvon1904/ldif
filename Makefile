@@ -1,5 +1,8 @@
 build:
-	clang main.c -o jdif
+	clang main.c -o bin/jdif
 
-example:
-	cat example.ldif | ./jdif | jq
+binary: build
+	sudo cp bin/jdif /usr/local/bin
+
+example: binary
+	cat example.ldif | jdif | jq
