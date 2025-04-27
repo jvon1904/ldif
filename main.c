@@ -11,17 +11,16 @@ typedef struct {
   char *data;
 } String;
 
-void appendString(String *json, char c) {
-  if (json->cap <= json->len) {
-    json->cap *= 2;
-    json->data = realloc(json->data, json->cap);
+void appendString(String *str, char c) {
+  if (str->cap <= str->len + 1) {
+    str->cap *= 2;
+    str->data = realloc(str->data, str->cap);
   }
-  json->data[json->len++] = c;
-  json->data[json->len] = '\0';
+  str->data[str->len++] = c;
+  str->data[str->len] = '\0';
 }
 
 void initString(String *str) {
-  String val;
   str->data = malloc(INITIAL_CAP);
   str->data[0] = '\0';
   str->len = 0;
