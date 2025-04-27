@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
       }
     // Unsupported
     } else {
-      printf("Usupported option: %s.\n", argv[1]);
+      printf("Unsupported option: %s.\n", argv[1]);
       return 1;
     }
   }
